@@ -3,15 +3,9 @@ package com.projectandroid.bean;
 public class Car extends Vehicle {
     private String type;
 
-    public Car() {
-    }
 
     public Car(String make, String plate, String color, String category, String type) {
         super(make, plate, color, category);
-        this.type = type;
-    }
-
-    public Car(String type) {
         this.type = type;
     }
 

@@ -3,11 +3,8 @@ package com.projectandroid.bean;
 public class Manager extends Employee {
     private int nbClients;
 
-    public Manager() {
-    }
-
-    public Manager(String name, int age, int birthYear, double monthlySalary, double rate, int nbClients) {
-        super(name, age, birthYear, monthlySalary, rate);
+    public Manager(String name, int age, int birthYear, double monthlySalary, double rate, Car car, int nbClients) {
+        super(name, age, birthYear, monthlySalary, rate, car);
         this.nbClients = nbClients;
     }
 

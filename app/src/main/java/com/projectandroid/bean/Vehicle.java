@@ -3,8 +3,6 @@ package com.projectandroid.bean;
 public class Vehicle {
     private String make, plate, color, category;
 
-    public Vehicle() {
-    }
 
     public Vehicle(String make, String plate, String color, String category) {
         this.make = make;

@@ -4,16 +4,15 @@ public class Employee {
     private String name;
     private int age, birthYear;
     private double monthlySalary, rate;
+    private Car car;
 
-    public Employee() {
-    }
-
-    public Employee(String name, int age, int birthYear, double monthlySalary, double rate) {
+    public Employee(String name, int age, int birthYear, double monthlySalary, double rate, Car car) {
         this.name = name;
         this.age = age;
         this.birthYear = birthYear;
         this.monthlySalary = monthlySalary;
         this.rate = rate;
+        this.car = car;
     }
 
     public String getName() {
@@ -54,5 +53,13 @@ public class Employee {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

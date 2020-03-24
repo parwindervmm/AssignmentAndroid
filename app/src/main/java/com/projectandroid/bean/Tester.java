@@ -3,11 +3,9 @@ package com.projectandroid.bean;
 public class Tester extends Employee {
     private int nbBugs;
 
-    public Tester() {
-    }
 
-    public Tester(String name, int age, int birthYear, double monthlySalary, double rate, int nbBugs) {
-        super(name, age, birthYear, monthlySalary, rate);
+    public Tester(String name, int age, int birthYear, double monthlySalary, double rate, Car car, int nbBugs) {
+        super(name, age, birthYear, monthlySalary, rate, car);
         this.nbBugs = nbBugs;
     }
 
