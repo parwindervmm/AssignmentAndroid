@@ -1,14 +1,14 @@
 package com.projectandroid.bean;
 
 public class Vehicle {
-    private String make, plate, color, category;
+    private String make, plate, color;
 
 
-    public Vehicle(String make, String plate, String color, String category) {
+    public Vehicle(String make, String plate, String color) {
         this.make = make;
         this.plate = plate;
         this.color = color;
-        this.category = category;
+
     }
 
     public String getMake() {
@@ -35,11 +35,4 @@ public class Vehicle {
         this.color = color;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 }

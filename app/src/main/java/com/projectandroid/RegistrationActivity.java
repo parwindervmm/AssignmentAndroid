@@ -3,7 +3,6 @@ package com.projectandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,17 +13,24 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.projectandroid.bean.Car;
+import com.projectandroid.bean.Employee;
+import com.projectandroid.bean.Manager;
+import com.projectandroid.bean.Motorcycle;
+import com.projectandroid.bean.Programmer;
+import com.projectandroid.bean.Tester;
+import com.projectandroid.bean.Vehicle;
+import com.projectandroid.dao.DatabaseHelper;
 
-import java.lang.reflect.Field;
 import java.util.Calendar;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    TableRow trCharacter, trSideCar;
+    TableRow trCharacter, trSideCar, trCarType;
     TextView tvCharacter;
-    RadioGroup rgVehicle;
-    EditText etFname, etLname, etBirthYear, etMonthlySalary, etOccupationRate, etEmpID, etVehicleModel, etPlateNumber;
-    String empType, color;
+    RadioGroup rgVehicle, rgSideCar;
+    EditText etFname, etLname, etBirthYear, etMonthlySalary, etOccupationRate, etEmpID, etVehicleModel, etPlateNumber, etCharacter, etCarType;
+    String empType, color, vehicle;
     Spinner spinnerColor, spinnerType;
 
     @Override
@@ -35,8 +41,10 @@ public class RegistrationActivity extends AppCompatActivity {
         //inflating views
         trCharacter = findViewById(R.id.trCharacter);
         trSideCar = findViewById(R.id.trSideCar);
+        trCarType = findViewById(R.id.trCarType);
         tvCharacter = findViewById(R.id.tvCharacter);
         rgVehicle = findViewById(R.id.rgVehicle);
+        rgSideCar = findViewById(R.id.rgSideCar);
         etFname = findViewById(R.id.etFname);
         etLname = findViewById(R.id.etLname);
         etBirthYear = findViewById(R.id.etBirthYear);
@@ -45,6 +53,8 @@ public class RegistrationActivity extends AppCompatActivity {
         etEmpID = findViewById(R.id.etID);
         etVehicleModel = findViewById(R.id.etVehicleModel);
         etPlateNumber = findViewById(R.id.etPlateNumber);
+        etCharacter = findViewById(R.id.etCharacter);
+        etCarType = findViewById(R.id.etCarType);
         spinnerType = (Spinner) findViewById(R.id.spinnerType);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterType = ArrayAdapter.createFromResource(this,
@@ -56,7 +66,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         spinnerColor = (Spinner) findViewById(R.id.spinnerColor);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapterColor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Colors.COLOR_NAMES);
+        ArrayAdapter<String> adapterColor = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Constants.COLOR_NAMES);
         // Specify the layout to use when the list of choices appears
         adapterColor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -106,11 +116,14 @@ public class RegistrationActivity extends AppCompatActivity {
         rgVehicle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
                 if (i == R.id.rbBike) {
+                    vehicle = "MotorBike";
                     trSideCar.setVisibility(View.VISIBLE);
+                    trCarType.setVisibility(View.GONE);
                 } else if (i == R.id.rbCar) {
+                    vehicle = "Car";
                     trSideCar.setVisibility(View.GONE);
+                    trCarType.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -162,9 +175,57 @@ public class RegistrationActivity extends AppCompatActivity {
 
         int empID = convertToInteger(etEmpID.getText().toString().trim());
 
-        if (checkDuplicateEmployee(empID)) {
+        if (DatabaseHelper.getInstance(this).employeeExist(empID)) {
+            errMsg = "Please specify unique employee id";
+            etEmpID.requestFocus();
+            etEmpID.setError(errMsg);
+            showError(errMsg);
             return;
         }
+        if (empType.equalsIgnoreCase("choose a type")) {
+            errMsg = "Please specify employee type";
+            showError(errMsg);
+            return;
+        }
+        if (etCharacter.getText().toString().trim().isEmpty()) {
+            switch (empType) {
+                case "Manager":
+                    errMsg = "Please specify number of clients";
+                    break;
+                case "Tester":
+                    errMsg = "Please specify number of bugs";
+                    break;
+                case "Programmer":
+                    errMsg = "Please specify number of projects";
+                    break;
+            }
+            showError(errMsg);
+            etCharacter.requestFocus();
+            etCharacter.setError(errMsg);
+            return;
+        }
+
+        if (vehicle == null) {
+            errMsg = "Please select a vehicle";
+            showError(errMsg);
+            return;
+        }
+
+        if (vehicle.equalsIgnoreCase("motorbike")) {
+            int id = rgSideCar.getCheckedRadioButtonId();
+            if (id != R.id.rbSideCarYes && id != R.id.rbSideCarNo) {
+                errMsg = "Please specify your bike has a sidecar or not";
+                showError(errMsg);
+                return;
+            }
+        } else if (etCarType.getText().toString().trim().isEmpty()) {
+            errMsg = "Please specify car type";
+            etCarType.requestFocus();
+            etCarType.setError(errMsg);
+            showError(errMsg);
+            return;
+        }
+
 
         if (etVehicleModel.getText().toString().trim().isEmpty()) {
             errMsg = "Please specify vehicle model";
@@ -183,22 +244,58 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
+
         if (color.equalsIgnoreCase("choose a color")) {
             errMsg = "Please specify vehicle color";
             showError(errMsg);
             return;
         }
-        if (empType.equalsIgnoreCase("choose a type")) {
-            errMsg = "Please specify employee type";
-            showError(errMsg);
-            return;
+        Vehicle v;
+        if (vehicle.equalsIgnoreCase("car")) {
+            v = new Car(etVehicleModel.getText().toString().trim(), etPlateNumber.getText().toString().trim(), color, etCarType.getText().toString().trim());
+        } else {
+            boolean sideCar = false;
+            if (rgSideCar.getCheckedRadioButtonId() == R.id.rbSideCarYes) {
+                sideCar = true;
+            } else {
+                sideCar = false;
+            }
+            v = new Motorcycle(etVehicleModel.getText().toString().trim(), etPlateNumber.getText().toString().trim(), color, sideCar);
         }
 
+        int rate = Integer.parseInt(etOccupationRate.getText().toString().trim());
+        double income = Double.parseDouble(etMonthlySalary.getText().toString().trim());
+        if (rate < 10) {
+            rate = 10;
+        }
 
-    }
-
-    private boolean checkDuplicateEmployee(int empID) {
-        return false;
+        if (rate > 100) {
+            rate = 100;
+        }
+        boolean res = false;
+        int age = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(etBirthYear.getText().toString().trim());
+        switch (empType) {
+            case "Manager":
+                Manager m = new Manager(etFname.getText().toString().trim() + " " + etLname.getText().toString().trim(), etEmpID.getText().toString().trim(), age, income, rate, v, Integer.parseInt(etCharacter.getText().toString().trim()));
+                m.setAnnualIncome();
+                res = DatabaseHelper.getInstance(this).insertEmployee(m);
+                break;
+            case "Tester":
+                Tester t = new Tester(etFname.getText().toString().trim() + " " + etLname.getText().toString().trim(), etEmpID.getText().toString().trim(), age, income, rate, v, Integer.parseInt(etCharacter.getText().toString().trim()));
+                t.setAnnualIncome();
+                res = DatabaseHelper.getInstance(this).insertEmployee(t);
+                break;
+            case "Programmer":
+                Programmer p = new Programmer(etFname.getText().toString().trim() + " " + etLname.getText().toString().trim(), etEmpID.getText().toString().trim(), age, income, rate, v, Integer.parseInt(etCharacter.getText().toString().trim()));
+                p.setAnnualIncome();
+                res = DatabaseHelper.getInstance(this).insertEmployee(p);
+                break;
+        }
+        if (res) {
+            finish();
+        } else {
+            showError("Unable to insert employee");
+        }
     }
 
 

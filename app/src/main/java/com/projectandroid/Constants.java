@@ -1,6 +1,10 @@
 package com.projectandroid;
 
-public class Colors {
+public class Constants {
+    public static final int GAIN_FACTOR_CLIENT = 500;
+    public static final int GAIN_FACTOR_TRAVEL = 100;
+    public static final int GAIN_FACTOR_ERROR = 10;
+    public static final int GAIN_FACTOR_PROJECTS = 200;
     public static String COLOR_NAMES[] = {
             "Choose a color",
             "AliceBlue",

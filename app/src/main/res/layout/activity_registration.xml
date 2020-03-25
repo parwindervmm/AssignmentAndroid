@@ -123,10 +123,10 @@
                     android:id="@+id/etOccupationRate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="100"
                     android:layout_weight="0.6"
                     android:hint="occupation rate"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="100" />
             </TableRow>
 
 
@@ -243,21 +243,47 @@
                     android:text="Side Car" />
 
                 <RadioGroup
+                    android:id="@+id/rgSideCar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/rbSideCarYes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Yes" />
 
                     <RadioButton
+                        android:id="@+id/rbSideCarNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No" />
                 </RadioGroup>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trCarType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="Car Type" />
+
+                <EditText
+                    android:id="@+id/etCarType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:hint="Car Type"
+                    android:inputType="text" />
             </TableRow>
 
             <TableRow

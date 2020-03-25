@@ -1,18 +1,18 @@
 package com.projectandroid.bean;
 
-public class Employee {
-    private String name;
-    private int age, birthYear;
-    private double monthlySalary, rate;
-    private Car car;
+public abstract class Employee {
+    private String name, id;
+    private int age;
+    private double income, rate;
+    private Vehicle vehicle;
 
-    public Employee(String name, int age, int birthYear, double monthlySalary, double rate, Car car) {
+    public Employee(String name, String id, int age, double income, double rate, Vehicle vehicle) {
         this.name = name;
+        this.id = id;
         this.age = age;
-        this.birthYear = birthYear;
-        this.monthlySalary = monthlySalary;
+        this.income = income;
         this.rate = rate;
-        this.car = car;
+        this.vehicle = vehicle;
     }
 
     public String getName() {
@@ -23,6 +23,14 @@ public class Employee {
         this.name = name;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public int getAge() {
         return age;
     }
@@ -31,20 +39,12 @@ public class Employee {
         this.age = age;
     }
 
-    public int getBirthYear() {
-        return birthYear;
+    public double getIncome() {
+        return income;
     }
 
-    public void setBirthYear(int birthYear) {
-        this.birthYear = birthYear;
-    }
-
-    public double getMonthlySalary() {
-        return monthlySalary;
-    }
-
-    public void setMonthlySalary(double monthlySalary) {
-        this.monthlySalary = monthlySalary;
+    public void setIncome(double income) {
+        this.income = income;
     }
 
     public double getRate() {
@@ -55,11 +55,13 @@ public class Employee {
         this.rate = rate;
     }
 
-    public Car getCar() {
-        return car;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setCar(Car car) {
-        this.car = car;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
+
+    public abstract void setAnnualIncome();
 }
