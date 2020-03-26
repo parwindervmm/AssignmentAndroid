@@ -15,8 +15,8 @@
         android:layout_alignParentTop="true"
         android:drawableStart="@drawable/ic_search_black_24dp"
         android:padding="15dp" />
-
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/btnAdd"

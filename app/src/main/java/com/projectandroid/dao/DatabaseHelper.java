@@ -68,6 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             motorcycle = (Motorcycle) vehicle;
         }
 
+        // insert emp object into db
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", emp.getName());
@@ -91,6 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        // create table with columns
         sqLiteDatabase.execSQL(
                 "create table IF NOT EXISTS employee " +
                         "(id integer primary key, name text,age text,income text, occupation text,eid text,etype text,enumber text,vehicle text,type text,model text,plate text,color text)"
@@ -99,8 +101,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public ArrayList<Employee> getAllEmployee() {
         ArrayList<Employee> emp_list = new ArrayList<>();
-
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from employee", null);
         res.moveToFirst();

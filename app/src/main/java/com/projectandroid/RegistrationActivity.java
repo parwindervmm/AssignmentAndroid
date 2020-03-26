@@ -72,6 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinnerColor.setAdapter(adapterColor);
 
+        // change vehicle type options according to option selected
         spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -130,6 +131,8 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void registerEmployee(View view) {
+
+        // validations for input fields
         String errMsg = "";
         if (etFname.getText().toString().trim().isEmpty()) {
             errMsg = "Please specify first name";
@@ -175,6 +178,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         int empID = convertToInteger(etEmpID.getText().toString().trim());
 
+        // check for duplicate emp id
         if (DatabaseHelper.getInstance(this).employeeExist(empID)) {
             errMsg = "Please specify unique employee id";
             etEmpID.requestFocus();
@@ -263,8 +267,10 @@ public class RegistrationActivity extends AppCompatActivity {
             v = new Motorcycle(etVehicleModel.getText().toString().trim(), etPlateNumber.getText().toString().trim(), color, sideCar);
         }
 
-        int rate = Integer.parseInt(etOccupationRate.getText().toString().trim());
         double income = Double.parseDouble(etMonthlySalary.getText().toString().trim());
+
+        // setting occupation rate
+        int rate = Integer.parseInt(etOccupationRate.getText().toString().trim());
         if (rate < 10) {
             rate = 10;
         }
@@ -292,6 +298,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 break;
         }
         if (res) {
+            //move to main activity in case of success
             finish();
         } else {
             showError("Unable to insert employee");

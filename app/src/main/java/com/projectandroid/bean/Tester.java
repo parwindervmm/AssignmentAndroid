@@ -36,10 +36,10 @@ public class Tester extends Employee {
         return "Name: " + getName() + ",a Tester\n" +
                 "Age: " + getAge() + "\n" +
                 "Employee has a " + (getVehicle() instanceof Car ? "car" : "motorcycle") + "\n" +
-                " -Model: " + getVehicle().getMake() + "\n" +
-                " -Plate: " + getVehicle().getPlate() + "\n" +
-                " -Color: " + getVehicle().getColor() + "\n" +
-                " -Type: " + (getVehicle() instanceof Car ? ((Car) getVehicle()).getType() : ((Motorcycle) getVehicle()).isSidecar() ? "with a sidecar" : "without a sidecar") + "\n" +
+                " - Model: " + getVehicle().getMake() + "\n" +
+                " - Plate: " + getVehicle().getPlate() + "\n" +
+                " - Color: " + getVehicle().getColor() + "\n" +
+                (getVehicle() instanceof Car ? " - Type: " + ((Car) getVehicle()).getType() : ((Motorcycle) getVehicle()).isSidecar() ? " - with a sidecar" : " - without a sidecar") + "\n" +
                 "Occupation rate: " + getRate() + "%\n" +
                 "Annual Income: $ " + getIncome() + "\n" +
                 "He/She has corrected " + getNbBugs() + " bugs";
