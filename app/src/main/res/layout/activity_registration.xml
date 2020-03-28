@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:padding="5dp"
-            android:text="Registration Form"
+            android:text="@string/registration_form"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
@@ -34,14 +34,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Employee First Name" />
+                    android:text="@string/employee_first_name" />
 
                 <EditText
                     android:id="@+id/etFname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="first name"
+                    android:hint="@string/first_name"
                     android:inputType="text" />
             </TableRow>
 
@@ -54,14 +54,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Employee Last Name" />
+                    android:text="@string/employee_last_name" />
 
                 <EditText
                     android:id="@+id/etLname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="last name"
+                    android:hint="@string/last_name"
                     android:inputType="text" />
             </TableRow>
 
@@ -75,14 +75,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Employee Birth Year" />
+                    android:text="@string/employee_birth_year" />
 
                 <EditText
                     android:id="@+id/etBirthYear"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="birth year"
+                    android:hint="@string/birth_year"
                     android:inputType="number" />
             </TableRow>
 
@@ -96,14 +96,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Monthly Salary" />
+                    android:text="@string/monthly_salary" />
 
                 <EditText
                     android:id="@+id/etMonthlySalary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="monthly salary"
+                    android:hint="@string/monthly_salary_hint"
                     android:inputType="number" />
             </TableRow>
 
@@ -117,14 +117,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Occupation Rate" />
+                    android:text="@string/occupation_rate" />
 
                 <EditText
                     android:id="@+id/etOccupationRate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="occupation rate"
+                    android:hint="@string/occupation_rate_hint"
                     android:inputType="number"
                     android:text="100" />
             </TableRow>
@@ -139,14 +139,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Employee ID" />
+                    android:text="@string/employee_id" />
 
                 <EditText
                     android:id="@+id/etID"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="employee id"
+                    android:hint="@string/employee_id_hint"
                     android:inputType="numberDecimal" />
             </TableRow>
 
@@ -161,14 +161,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Employee Type" />
+                    android:text="@string/employee_type" />
 
                 <Spinner
                     android:id="@+id/spinnerType"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="0.6"
-                    android:hint="employee id"
                     android:inputType="numberDecimal" />
             </TableRow>
 
@@ -183,15 +182,14 @@
                     android:id="@+id/tvCharacter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
-                    android:text="Employee Type" />
+                    android:layout_weight="0.4" />
 
                 <EditText
                     android:id="@+id/etCharacter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="number"
+                    android:hint="@string/number"
                     android:inputType="numberDecimal" />
             </TableRow>
 
@@ -205,7 +203,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Vehicle" />
+                    android:text="@string/vehicle" />
 
                 <RadioGroup
                     android:id="@+id/rgVehicle"
@@ -218,13 +216,13 @@
                         android:id="@+id/rbCar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Car" />
+                        android:text="@string/car" />
 
                     <RadioButton
                         android:id="@+id/rbBike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Motorbike" />
+                        android:text="@string/motorbike" />
                 </RadioGroup>
             </TableRow>
 
@@ -240,7 +238,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Side Car" />
+                    android:text="@string/side_car" />
 
                 <RadioGroup
                     android:id="@+id/rgSideCar"
@@ -253,13 +251,13 @@
                         android:id="@+id/rbSideCarYes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Yes" />
+                        android:text="@string/yes" />
 
                     <RadioButton
                         android:id="@+id/rbSideCarNo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="No" />
+                        android:text="@string/no" />
                 </RadioGroup>
             </TableRow>
 
@@ -275,14 +273,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Car Type" />
+                    android:text="@string/car_type" />
 
                 <EditText
                     android:id="@+id/etCarType"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Car Type"
+                    android:hint="@string/car_type"
                     android:inputType="text" />
             </TableRow>
 
@@ -295,14 +293,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Vehicle Model" />
+                    android:text="@string/vehicle_model" />
 
                 <EditText
                     android:id="@+id/etVehicleModel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="Model"
+                    android:hint="@string/model"
                     android:inputType="text" />
             </TableRow>
 
@@ -315,14 +313,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Plate Number" />
+                    android:text="@string/plate_number" />
 
                 <EditText
                     android:id="@+id/etPlateNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.6"
-                    android:hint="plate number"
+                    android:hint="@string/plate_number_hint"
                     android:inputType="text" />
             </TableRow>
 
@@ -336,15 +334,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
-                    android:text="Vehicle Color" />
+                    android:text="@string/vehicle_color" />
 
                 <Spinner
                     android:id="@+id/spinnerColor"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-
                     android:layout_weight="0.6"
-                    android:hint="employee id"
+                    android:hint="@string/employee_id_hint"
                     android:inputType="numberDecimal" />
             </TableRow>
 
@@ -355,6 +352,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:onClick="registerEmployee"
-            android:text="Register" />
+            android:text="@string/register" />
     </LinearLayout>
 </ScrollView>

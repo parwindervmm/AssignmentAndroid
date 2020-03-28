@@ -15,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:drawableStart="@drawable/ic_search_black_24dp"
         android:padding="15dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
@@ -28,5 +29,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:onClick="addEmployee"
-        android:text="ADD" />
+        android:text="@string/add" />
 </RelativeLayout>
