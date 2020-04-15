@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -37,12 +39,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean employeeExist(int eid) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from employee where eid=" + eid + "", null);
+        Cursor res = db.query("employee", null, "eid = ?", new String[]{String.valueOf(eid)}, null, null, null);
         if (res.getCount() > 0) {
             return true;
         }
 
         return false;
+    }
+
+    public boolean deleteEmployee(int eid) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.delete("employee", "eid = " + eid + "", null) > 0;
     }
 
     public boolean insertEmployee(Employee emp) {

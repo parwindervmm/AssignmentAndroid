@@ -1,6 +1,8 @@
 package com.projectandroid.bean;
 
-public abstract class Employee {
+import java.io.Serializable;
+
+public abstract class Employee implements Serializable {
     private String name, id;
     private int age;
     private double income, rate;

@@ -1,11 +1,14 @@
 package com.projectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,22 +16,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.projectandroid.adapter.Actions;
 import com.projectandroid.adapter.EmployeeAdapter;
+
+
 import com.projectandroid.bean.Employee;
-import com.projectandroid.bean.Manager;
-import com.projectandroid.bean.Programmer;
-import com.projectandroid.bean.Tester;
 import com.projectandroid.dao.DatabaseHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Actions {
 
     RecyclerView rv;
     ArrayList<Employee> employees = new ArrayList<>();
     EmployeeAdapter employeeAdapter;
     EditText etSearch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +58,22 @@ public class MainActivity extends AppCompatActivity {
         });
         rv = findViewById(R.id.rv);
 
-        employeeAdapter = new EmployeeAdapter(this, employees);
+        employeeAdapter = new EmployeeAdapter(this, employees, this);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        // divider for recycler items
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        rv.setLayoutManager(mLayoutManager);
+        rv.setItemAnimator(new DefaultItemAnimator());
         rv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        // set adapter to recycler view
         rv.setAdapter(employeeAdapter);
+
+        // adding item touch helper
+        // only ItemTouchHelper.LEFT added to detect Right to Left swipe
+        // if you want both Right -> Left and Left -> Right
+        // add pass ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT as param
+
+        // divider for recycler items
+        // set adapter to recycler view
+
     }
 
     void filter(String text) {
@@ -98,5 +111,13 @@ public class MainActivity extends AppCompatActivity {
     //button handler
     public void addEmployee(View view) {
         startActivity(new Intent(this, RegistrationActivity.class));
+    }
+
+    @Override
+    public void deleteEmployee(int eid) {
+        boolean b = DatabaseHelper.getInstance(this).deleteEmployee(eid);
+        if (b) {
+            getData();
+        }
     }
 }

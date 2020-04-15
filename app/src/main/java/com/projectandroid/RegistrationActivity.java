@@ -22,7 +22,9 @@ import com.projectandroid.bean.Tester;
 import com.projectandroid.bean.Vehicle;
 import com.projectandroid.dao.DatabaseHelper;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -32,12 +34,15 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText etFname, etLname, etBirthYear, etMonthlySalary, etOccupationRate, etEmpID, etVehicleModel, etPlateNumber, etCharacter, etCarType;
     String empType, color, vehicle;
     Spinner spinnerColor, spinnerType;
+    Employee empToEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
+        if (getIntent().hasExtra("emp")) {
+            empToEdit = (Employee) getIntent().getSerializableExtra("emp");
+        }
         //inflating views
         trCharacter = findViewById(R.id.trCharacter);
         trSideCar = findViewById(R.id.trSideCar);

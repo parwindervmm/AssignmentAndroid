@@ -1,6 +1,8 @@
 package com.projectandroid.bean;
 
-public class Vehicle {
+import java.io.Serializable;
+
+public class Vehicle implements Serializable {
     private String make, plate, color;
 
 
