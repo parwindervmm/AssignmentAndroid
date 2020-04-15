@@ -52,6 +52,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.delete("employee", "eid = " + eid + "", null) > 0;
     }
 
+    public boolean updateEmployee(Employee emp) {
+        deleteEmployee(Integer.parseInt(emp.getId()));
+        return insertEmployee(emp);
+
+    }
+
     public boolean insertEmployee(Employee emp) {
         Manager m = null;
         Programmer p = null;

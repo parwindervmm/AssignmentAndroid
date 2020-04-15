@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -35,14 +36,16 @@ public class RegistrationActivity extends AppCompatActivity {
     String empType, color, vehicle;
     Spinner spinnerColor, spinnerType;
     Employee empToEdit;
+    Button btAction;
+    TextView tvHead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        if (getIntent().hasExtra("emp")) {
-            empToEdit = (Employee) getIntent().getSerializableExtra("emp");
-        }
+        tvHead = findViewById(R.id.tvHead);
+        btAction = findViewById(R.id.btnAction);
+
         //inflating views
         trCharacter = findViewById(R.id.trCharacter);
         trSideCar = findViewById(R.id.trSideCar);
@@ -133,6 +136,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
+        if (getIntent().hasExtra("emp")) {
+            empToEdit = (Employee) getIntent().getSerializableExtra("emp");
+            tvHead.setText("Update Employee Form");
+            btAction.setText("Update");
+            etEmpID.setText(empToEdit.getId());
+            etEmpID.setEnabled(false);
+        }
     }
 
     public void registerEmployee(View view) {
@@ -184,7 +194,7 @@ public class RegistrationActivity extends AppCompatActivity {
         int empID = convertToInteger(etEmpID.getText().toString().trim());
 
         // check for duplicate emp id
-        if (DatabaseHelper.getInstance(this).employeeExist(empID)) {
+        if (empToEdit == null && DatabaseHelper.getInstance(this).employeeExist(empID)) {
             errMsg = "Please specify unique employee id";
             etEmpID.requestFocus();
             etEmpID.setError(errMsg);
@@ -289,17 +299,26 @@ public class RegistrationActivity extends AppCompatActivity {
             case "Manager":
                 Manager m = new Manager(etFname.getText().toString().trim() + " " + etLname.getText().toString().trim(), etEmpID.getText().toString().trim(), age, income, rate, v, Integer.parseInt(etCharacter.getText().toString().trim()));
                 m.setAnnualIncome();
-                res = DatabaseHelper.getInstance(this).insertEmployee(m);
+                if (empToEdit == null)
+                    res = DatabaseHelper.getInstance(this).insertEmployee(m);
+                else
+                    res = DatabaseHelper.getInstance(this).updateEmployee(m);
                 break;
             case "Tester":
                 Tester t = new Tester(etFname.getText().toString().trim() + " " + etLname.getText().toString().trim(), etEmpID.getText().toString().trim(), age, income, rate, v, Integer.parseInt(etCharacter.getText().toString().trim()));
                 t.setAnnualIncome();
-                res = DatabaseHelper.getInstance(this).insertEmployee(t);
+                if (empToEdit == null)
+                    res = DatabaseHelper.getInstance(this).insertEmployee(t);
+                else
+                    res = DatabaseHelper.getInstance(this).updateEmployee(t);
                 break;
             case "Programmer":
                 Programmer p = new Programmer(etFname.getText().toString().trim() + " " + etLname.getText().toString().trim(), etEmpID.getText().toString().trim(), age, income, rate, v, Integer.parseInt(etCharacter.getText().toString().trim()));
                 p.setAnnualIncome();
-                res = DatabaseHelper.getInstance(this).insertEmployee(p);
+                if (empToEdit == null)
+                    res = DatabaseHelper.getInstance(this).insertEmployee(p);
+                else
+                    res = DatabaseHelper.getInstance(this).updateEmployee(p);
                 break;
         }
         if (res) {

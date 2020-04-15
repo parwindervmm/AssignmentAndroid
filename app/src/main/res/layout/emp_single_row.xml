@@ -29,7 +29,7 @@
                 android:padding="10dp"
                 android:src="@drawable/ic_edit_black_24dp"
 
-                android:visibility="gone" />
+                />
 
             <ImageView
                 android:id="@+id/delete_icon"
